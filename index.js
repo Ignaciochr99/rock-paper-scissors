@@ -2,7 +2,6 @@ let humanScore = 0;
 let computerScore = 0;
 let ties = 0;
 
-playGame(playRound(getComputerChoice(),getHumanChoice()),5);
 
 function getComputerChoice(){
     dictionary = {0: "rock", 1: "paper", 2:"scissors"}
@@ -10,28 +9,42 @@ function getComputerChoice(){
     return dictionary[decision];
 }
 
-function getHumanChoice (){
-    decision = prompt("rock, paper, scissors: ");
-    return decision;
-}
-
 function playRound (computerChoice, humanChoice) {
     computerChoice = computerChoice.toLowerCase();
     humanChoice = humanChoice.toLowerCase();
+    buttons = document.querySelector("div .buttons")
+    choices = document.querySelectorAll("td")
+    text = document.querySelector("div .text")
+    console.log(choices)
     if (computerChoice == "rock" && humanChoice == "scissors" || computerChoice == "scissors" && humanChoice == "paper" || computerChoice == "paper" && humanChoice == "rock"){
         computerScore ++;
-        console.log(`You lose! ${computerChoice} beats ${humanChoice}`);
+        choices.item(1).innerText = computerScore;
+        if (computerScore == 5){
+            text.innerText = `Computer wins!`;
+            buttons.style.display = "none";
+        } else {
+            text.innerText = `You lose! ${computerChoice} beats ${humanChoice}`;
+        } 
     } else if (humanChoice == "rock" && computerChoice == "scissors" || humanChoice == "scissors" && computerChoice == "paper" || humanChoice == "paper" && computerChoice == "rock"){
         humanScore ++;
-        console.log(`You lose! ${humanChoice} beats ${computerChoice}`);
+        choices.item(0).innerText = humanScore;
+        if (humanScore == 5){
+            text.innerText = `Human wins!`;
+            buttons.style.display = "none";
+        } else {
+            text.innerText = `You win! ${humanChoice} beats ${computerChoice}`;
+        } 
     } else {
         ties ++;
-        console.log("Tie!")
+        choices.item(2).innerText = ties;
+        text.innerText = "Tie!";
     }
 }
 
-function playGame(func, times){
-    for(let i = 0; i<times; i++){}
-        func();
-        console.log(`Computer: ${computerScore} | Human: ${humanScore} | Ties: ${ties}`);
-}
+buttons = document.querySelector("div .buttons")
+buttons.addEventListener("click",(e) => {
+    humanChoice = e.target.innerText;
+    computerChoice = getComputerChoice();
+    console.log(humanChoice+" "+computerChoice)
+    playRound(computerChoice,humanChoice)
+})

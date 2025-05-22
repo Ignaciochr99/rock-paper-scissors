@@ -4,10 +4,36 @@
     <link rel="shortcut icon" href="#">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="index.js"></script>
+    <script src="index.js" defer></script>
+    <link rel="stylesheet" href="style.css">
     <title>Rock Paper Scissors</title>
 </head>
 <body>
-    <h1 class="title">Hello</h1>
+<div class="container">
+    <div class="score-counter">
+        <h1 class="title">Play Rock, Paper, Scissors! </h1>
+    </div>
+
+    <table>
+        <tr>
+            <th>Human</th>
+            <th>Computer</th>
+            <th>Ties</th>
+        </tr>
+        <tr>
+            <td class="humanScore">0</td>
+            <td class="computerScore">0</td>
+            <td class="ties">0</td>
+        </tr>
+    </table>
+
+    <div class="text"></div>
+
+    <div class="buttons">
+        <button class="rock">Rock</button>
+        <button class="paper">Paper</button>
+        <button class="scissors">Scissors</button>
+    </div>
+</div>
 </body>
 </html>
